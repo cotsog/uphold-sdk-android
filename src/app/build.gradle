@@ -16,6 +16,12 @@ android {
         }
     }
 
+    testOptions {
+        unitTests.all {
+            jvmArgs '-XX:MaxPermSize=2048m'
+        }
+    }
+
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 22

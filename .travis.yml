@@ -1,10 +1,15 @@
 language: android
 
+sudo: required
+
 jdk: oraclejdk7
 
 env:
   global:
+    - MALLOC_ARENA_MAX=2
     - ADB_INSTALL_TIMEOUT=8
+    # Giving even more memory to Gradle JVM
+    - GRADLE_OPTS="-Xmx2048m -XX:MaxPermSize=2048m"
 
   matrix:
     - ANDROID_TARGET=16 ANDROID_ABI=default/armeabi-v7a
@@ -31,6 +36,5 @@ before_script:
 
 script:
   - cd src
-  - ./gradlew clean assemble -PdisablePreDex -q
-  - ./gradlew connectedAndroidTest --console=plain
+  - travis_wait ./gradlew clean assemble connectedAndroidTest --console=plain -PdisablePreDex
   - ./gradlew test --console=plain
