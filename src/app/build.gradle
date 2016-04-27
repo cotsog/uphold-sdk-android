@@ -18,7 +18,7 @@ android {
 
     testOptions {
         unitTests.all {
-            jvmArgs '-XX:MaxPermSize=2048m'
+            jvmArgs '-Xmx2048m -XX:MaxPermSize=2048m'
         }
     }
 
